@@ -9,17 +9,13 @@ class Token {
   final String? value;
 
   @override
-  String toString() => value ?? type.name;
+  String toString() => value?? type.name;
 }
 
 /// Converts a raw expression string (using the engine's internal ASCII
 /// operators — see [AppConstants]) into a flat list of [Token]s.
-///
-/// Kept deliberately dumb: it does not know about operator precedence or
-/// grouping. That is the parser's job. This makes the tokenizer trivial to
-/// unit test in isolation and reuse for input validation (e.g. "can I add
-/// another decimal point right now?").
 class Tokenizer {
+  const Tokenizer();
   static const String _operatorChars = '+-*/%()';
 
   List<Token> tokenize(String expression) {
